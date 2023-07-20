@@ -1,0 +1,22 @@
+{
+  "name": "playwright_with_cucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test":"npx cucumber-js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "cucumber": "^6.0.7",
+    "playwright": "^1.36.1",
+    "selectors": "^0.0.1"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.22.5",
+    "@playwright/test": "^1.36.1"
+  }
+}
