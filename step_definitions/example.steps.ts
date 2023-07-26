@@ -30,9 +30,9 @@ Given('User enter the username as {string}', async function (username){
 });
   
 Given('User enter the password as {string}', async (password) => {
- await page.locator("input[formcontrolname='password']").type(password);
- 
-});
+  
+  await page.locator("input[formcontrolname='password']").type(password);
+}); 
 
 
 When('User click on the login button', async ()=> {
@@ -40,23 +40,43 @@ When('User click on the login button', async ()=> {
 });
 
 When('login success', async () => {
- const text =  await page.locator("//button[contains(@class,'mat-focus-indicator mat-menu-trigger')]//span[1]").textContent();
+  const text =  await page.locator("//button[contains(@class,'mat-focus-indicator mat-menu-trigger')]//span[1]").textContent();
  console.log("UserName is "+ text)
 });
 
 
 Then('Login failed', async () => {
   
- const failmsg=  await page.locator("mat-error[role='alert']");
-//  expect(await failmsg.isDisplayed()).to.be.true;
-//  await expect(failmsg).toBeVisible();
- console.log("Failed",failmsg)
-//  expect(response.status()).toBe(200);
+  const failmsg=  await page.locator("mat-error[role='alert']");
+  //  expect(await failmsg.isDisplayed()).to.be.true;
+  //  await expect(failmsg).toBeVisible();
+  console.log("Failed",failmsg)
+  //  expect(response.status()).toBe(200);
+  
+}); 
 
+
+When('user Search for a Book is {string}',{ timeout: 60000 }, async (book) => {
+  await page.locator("input[type='search']").type(book);
+  await page.locator("mat-option[role='option'] span").click();
+  
 });
 
+When('user add the book to the cart', async () => {
+  await page.locator("//button[@color='primary']").click();
+//  await page.locator( "span.mat-button-wrapper").type(" Add to Cart").click()
+});
+
+
+Then('the card badge should get updates',{ timeout: 60000 }, async () => {
+ const badgeCount = await page.locator( "#mat-badge-content-0").textContent();
+ expect(Number(badgeCount?.length)).not.to.equal(0);
+
+})
+
+
 After(async () => {
-  await browser.close(); 
+  // await browser.close(); 
 });
 
 
